@@ -10,7 +10,7 @@ obj/
 *.suo
 *.userosscache
 *.sln.docstates
-.sln
+*.sln
 
 # Visual Studio Code
 .vscode/
