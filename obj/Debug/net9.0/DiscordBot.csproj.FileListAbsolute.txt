@@ -1,0 +1,5 @@
+/home/mark/programming/c_sharp/DiscordBot/obj/Debug/net9.0/DiscordBot.csproj.AssemblyReference.cache
+/home/mark/programming/c_sharp/DiscordBot/obj/Debug/net9.0/DiscordBot.GeneratedMSBuildEditorConfig.editorconfig
+/home/mark/programming/c_sharp/DiscordBot/obj/Debug/net9.0/DiscordBot.AssemblyInfoInputs.cache
+/home/mark/programming/c_sharp/DiscordBot/obj/Debug/net9.0/DiscordBot.AssemblyInfo.cs
+/home/mark/programming/c_sharp/DiscordBot/obj/Debug/net9.0/DiscordBot.csproj.CoreCompileInputs.cache
