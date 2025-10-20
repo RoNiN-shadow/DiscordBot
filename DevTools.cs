@@ -7,7 +7,6 @@ public class DevTools : InteractionModuleBase<SocketInteractionContext>
     public DevTools(InteractionService interactionService)
     {
         _interactionService = interactionService;
-
     }
     [SlashCommand("ping", "ping/pong")]
     public async Task Ping()

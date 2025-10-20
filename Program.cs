@@ -5,6 +5,8 @@ using Discord.Interactions;
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 
+
+
 namespace DiscordBot
 {
     class Program
@@ -13,6 +15,7 @@ namespace DiscordBot
         private readonly InteractionService _interactionService;
 
         private readonly IServiceProvider _services;
+        
 
         public Program()
         {
@@ -34,7 +37,7 @@ namespace DiscordBot
             _client.InteractionCreated += HandleInteraction;
             _client.SlashCommandExecuted += SlashCommandHandler;
 
-            string? botToken = Environment.GetEnvironmentVariable("DISCORD_TEST_BOT");
+            string? botToken = Environment.GetEnvironmentVariable("DISOCRD_API_KEY");
             await _client.LoginAsync(TokenType.Bot, botToken);
             await _client.StartAsync();
 
