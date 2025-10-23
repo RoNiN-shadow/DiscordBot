@@ -37,7 +37,7 @@ namespace DiscordBot
             _client.InteractionCreated += HandleInteraction;
             _client.SlashCommandExecuted += SlashCommandHandler;
 
-            string? botToken = Environment.GetEnvironmentVariable("DISOCRD_API_KEY");
+            string? botToken = Environment.GetEnvironmentVariable("DISCORD_API_KEY");
             await _client.LoginAsync(TokenType.Bot, botToken);
             await _client.StartAsync();
 
