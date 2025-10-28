@@ -52,62 +52,12 @@ namespace DiscordBot
         {
             foreach(SocketGuild guild in _client.Guilds)
             {
-                Console.WriteLine("****************");
-
-                Console.WriteLine($"Name: {guild.Name}");
-                Console.WriteLine($"ID: {guild.Id}");
-                Console.WriteLine($"Owner: {guild.OwnerId}");
-                Console.WriteLine($"Icon URL: {guild.IconUrl}");
-
-                Console.WriteLine("****************");
-
                 
                 await _interactionService.AddModulesAsync(typeof(Program).Assembly, _services);
                 await _interactionService.RegisterCommandsToGuildAsync(guild.Id);
-                SlashCommandBuilder suiCommand = new SlashCommandBuilder()
-                    .WithName("sui")
-                    .WithDescription("suuuuiii");
 
-                try
-                {
-                    await guild.CreateApplicationCommandAsync(suiCommand.Build());
-                }
-                catch (HttpException exception)
-                {
-                    string json = JsonSerializer.Serialize(exception.Errors, new JsonSerializerOptions
-                    {
-                        WriteIndented = true
-                    });
-
-                    Console.WriteLine(json);
-                }
-
-                if (guild != null){
-
-                    var textChannel = guild.TextChannels
-                       .FirstOrDefault(c =>
-                            c.GetUser(_client.CurrentUser.Id)?.GetPermissions(c).SendMessages == true);
- 
-                    if (textChannel != null){
-
-                        await textChannel.SendMessageAsync("The bot is alive");
-
-                    }
-                    else{
-                        Console.WriteLine("Can't access text channels for this bot");
-                    }
-                }
             }
 
-        }
-        private  async Task SlashCommandHandler(SocketSlashCommand command) 
-        {
-            switch (command.Data.Name)
-            {
-                case "sui":
-                    await command.RespondAsync($"SUIIIII");
-                    break;
-            }
         }
         private async Task HandleInteraction(SocketInteraction interaction)
         {
