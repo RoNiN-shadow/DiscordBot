@@ -4,17 +4,10 @@ using System.Text.Json.Nodes;
 
 public class ChatAI : InteractionModuleBase<SocketInteractionContext> {
 
-    private readonly string _modelName;
-    private readonly string _endpoint;
-    private string _message;
+    private readonly static string _modelName = "gemeni-2.5-flash-lite"; 
+    private readonly static string _endpoint=$"https://generativelanguage.googleapis.com/v1beta/models/{_modelName}:generateContent";
+    private static string? _message;
 
-    public ChatAI(string message)
-    {
-        _modelName = "gemeni-2.5-flash-lite"; 
-        _endpoint = $"https://generativelanguage.googleapis.com/v1beta/models/{_modelName}:generateContent";
-        _message = message;
-    }
-    
     [SlashCommand("chat", "Chat with AI")]
     public async Task Chat([Summary("text", "Say anything")] string message)
     {
@@ -55,7 +48,7 @@ public class ChatAI : InteractionModuleBase<SocketInteractionContext> {
         };
         StringContent content = new(json.ToString(), Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await http.PostAsync(endpoint, content);
+        HttpResponseMessage response = await http.PostAsync(_endpoint, content);
 
         string? resultString = await response.Content.ReadAsStringAsync() ?? "";
 
@@ -63,10 +56,10 @@ public class ChatAI : InteractionModuleBase<SocketInteractionContext> {
                 ?? throw new InvalidOperationException("didn't parse JSON");
         return doc;
     }
-    private static async IAsyncEnumerable<string> SplitAnswer(string endpoint, string message)
+    private static async IAsyncEnumerable<string> SplitAnswer()
     {
 
-        JsonNode doc = await MakeRequest(endpoint, message);
+        JsonNode doc = await MakeRequest();
 
         string? resultText = doc["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
         Console.WriteLine(resultText);
