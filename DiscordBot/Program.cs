@@ -49,13 +49,8 @@ namespace DiscordBot
         }
         private  async Task ClientReady()
         {
-            foreach(SocketGuild guild in _client.Guilds)
-            {
-                
-                await _interactionService.AddModulesAsync(typeof(Program).Assembly, _services);
-                await _interactionService.RegisterCommandsToGuildAsync(guild.Id);
-
-            }
+            await _interactionService.AddModulesAsync(typeof(Program).Assembly, _services);
+            await _interactionService.RegisterCommandsGloballyAsync();
 
         }
         private async Task HandleInteraction(SocketInteraction interaction)
